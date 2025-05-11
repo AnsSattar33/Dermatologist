@@ -1,9 +1,9 @@
-import { Button } from './components/ui/button'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import RootLayout from './pages/RootLayout'
 import UploadingImage from './pages/UploadingImage'
 import LandingPage from './pages/LandingPage'
 import Products from './pages/Products'
+import Login from './pages/Login'
 function App() {
 
   return (
@@ -14,7 +14,9 @@ function App() {
             <Route index element={<LandingPage />} />
             <Route path='upload' element={<UploadingImage />} />
             <Route path='products' element={<Products />} />
+
             <Route path='*' element={<div>404 Not Found</div>} />
+            <Route path='/login' element={<Login />} />
           </Route>
         </Routes>
       </BrowserRouter>

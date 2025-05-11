@@ -42,30 +42,31 @@ const Products = () => {
     ]
 
     return (
-        <div className='flex flex-col container mx-auto mt-10'>
-            <h1 className='text-3xl font-bold mb-10 mx-10'>Recommended Products</h1>
-            <div className='flex flex-wrap justify-start '>
-                {
-                    productValue?.map((product) => (
-                        <div key={product.id} className='w-2/8 mb-10 flex flex-wrap justify-start mx-10'>
-                            <Card>
-                                <CardHeader>
-                                    <img src={product.img} alt={product.name} className="w-full h-auto mb-4" />
-                                </CardHeader>
-                                <CardContent>
-                                    <h2 className='text-xl font-semibold'>{product.name}</h2>
-                                    <p className='text-gray-600'>{product.description}</p>
-                                </CardContent>
-                                <CardFooter className='flex flex-grow'>
-                                    <CardTitle>Tags</CardTitle>
-                                    <CardDescription>{product.tags.join(', ')}</CardDescription>
-                                </CardFooter>
-                            </Card>
-                        </div>
-                    ))
-                }
+        <div className='bg-gray-100 h-full p-10'>
+            <div className='flex flex-col container mx-auto '>
+                <h1 className='text-3xl font-bold mb-10 mx-10'>Recommended Products</h1>
+                <div className='flex flex-wrap justify-start '>
+                    {
+                        productValue?.map((product) => (
+                            <div key={product.id} className='w-2/8 mb-10 flex flex-wrap justify-start mx-10'>
+                                <Card>
+                                    <CardHeader>
+                                        <img src={product.img} alt={product.name} className="w-full h-auto mb-4" />
+                                    </CardHeader>
+                                    <CardContent>
+                                        <h2 className='text-xl font-semibold'>{product.name}</h2>
+                                        <p className='text-gray-600'>{product.description}</p>
+                                    </CardContent>
+                                    <CardFooter className='flex flex-grow'>
+                                        <CardTitle>Tags</CardTitle>
+                                        <CardDescription>{product.tags.join(', ')}</CardDescription>
+                                    </CardFooter>
+                                </Card>
+                            </div>
+                        ))
+                    }
+                </div>
             </div>
-
         </div>
     )
 }
