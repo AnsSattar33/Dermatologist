@@ -1,11 +1,20 @@
 import { Button } from '@/components/ui/button'
-import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import { z } from 'zod'
 
+import { createAccount } from '@/lib/appwrite/auth'
+import { login, logout } from '@/lib/redux/authSlice'
+import { useAppDispatch } from '@/hooks/useAppDispatch'
+import { useAppSelector } from '@/hooks/useAppSelector'
+
 const Login = () => {
+
+    const navigate = useNavigate()
+
     const formSchema = z.object({
         username: z.string().min(2).max(50),
         email: z.string().email(),
@@ -26,7 +35,11 @@ const Login = () => {
     function onSubmit(values: z.infer<typeof formSchema>) {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
+
+        const { email, password, username } = values
+        createAccount({ email, password, username })
         console.log(values)
+        navigate('/upload')
     }
 
     return (
