@@ -57,9 +57,9 @@ const Products = () => {
                                         <h2 className='text-xl font-semibold'>{product.name}</h2>
                                         <p className='text-gray-600'>{product.description}</p>
                                     </CardContent>
-                                    <CardFooter className='flex flex-grow'>
-                                        <CardTitle>Tags</CardTitle>
-                                        <CardDescription>{product.tags.join(', ')}</CardDescription>
+                                    <CardFooter className='flex gap-2'>
+                                        <CardTitle className='self-start'>Tags</CardTitle> {' '}
+                                        <CardDescription>{product.tags.join(', ').toUpperCase()}</CardDescription>
                                     </CardFooter>
                                 </Card>
                             </div>
