@@ -31,7 +31,13 @@ const Navbar = () => {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className='w-56 flex flex-col justify-center items-start bg-gray-200 space-y-5 text-black rounded-xl'>
                             <DropdownMenuLabel className='hover:bg-gray-300 w-full p-4 font-medium text-xl cursor-pointer rounded-t-xl'>My Account</DropdownMenuLabel>
-                            <Link className='w-full' to={"/login"}><DropdownMenuItem className='hover:bg-gray-300 p-4 font-medium text-xl cursor-pointer'>Login</DropdownMenuItem></Link>
+                            <Link className='w-full' to={"/login"}>
+                                <DropdownMenuItem className='hover:bg-gray-300 p-4 font-medium text-xl cursor-pointer'>Login</DropdownMenuItem>
+                            </Link>
+                            <Link className='w-full' to={"/signup"}>
+                                <DropdownMenuItem className='hover:bg-gray-300 p-4 font-medium text-xl cursor-pointer'>Signup</DropdownMenuItem>
+                            </Link>
+
                             <Link className='w-full' to={'/products'}>
                                 <DropdownMenuItem className='hover:bg-gray-300 w-full p-4 font-medium text-xl cursor-pointer'>Products</DropdownMenuItem>
                             </Link>

@@ -29,13 +29,7 @@ export const createAccount = async ({ username, email, password }: { username: s
 
 }
 
-export const loginAccount = async ({
-    email,
-    password,
-}: {
-    email: string
-    password: string
-}) => {
+export const loginAccount = async ({ email, password }: { email: string, password: string }) => {
     try {
         const session = await account.createEmailPasswordSession(email, password)
 
@@ -47,3 +41,12 @@ export const loginAccount = async ({
         throw error
     }
 }
+
+// export const logoutAccount = async () => {
+
+//     try {
+//         const result = await account.deleteSession()
+//     } catch (error) {
+        
+//     }
+// }

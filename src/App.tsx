@@ -4,6 +4,8 @@ import UploadingImage from './pages/UploadingImage'
 import LandingPage from './pages/LandingPage'
 import Products from './pages/Products'
 import Login from './pages/Login'
+import SignupPage from './pages/SignupPage'
+import ErrorPage from './pages/ErrorPage'
 function App() {
 
   return (
@@ -15,8 +17,9 @@ function App() {
             <Route path='upload' element={<UploadingImage />} />
             <Route path='products' element={<Products />} />
 
-            <Route path='*' element={<div>404 Not Found</div>} />
-            <Route path='/login' element={<Login />} />
+            <Route path='*' element={<ErrorPage />} />
+            <Route path='login' element={<Login />} />
+            <Route path='signup' element={<SignupPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
