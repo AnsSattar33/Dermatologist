@@ -42,7 +42,6 @@ const SignupPage = () => {
 
         const { email, password, username } = values
         createAccount({ email, password, username })
-        console.log(values)
         navigate('/upload')
     }
 

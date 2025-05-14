@@ -19,12 +19,12 @@ export const createAccount = async ({ username, email, password }: { username: s
             return loginAccount({ email, password })
 
         } else {
-            console.log("user not found")
+            console.error("user not found")
         }
 
     } catch (error) {
 
-        console.log('error in CreateAccount = ', error)
+        console.error('error in CreateAccount = ', error)
     }
 
 }
@@ -35,7 +35,9 @@ export const loginAccount = async ({ email, password }: { email: string, passwor
 
         if (session) {
             return session
-        } else console.log("Session has not found ")
+        } else {
+            console.error("Session has not found ")
+        }
 
     } catch (error) {
         throw error

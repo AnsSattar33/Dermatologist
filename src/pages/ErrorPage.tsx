@@ -1,10 +1,8 @@
 import { Button } from '@/components/ui/button';
-import React from 'react';
 import { useLocation } from 'react-router-dom';
 
 const ErrorPage = () => {
     const location = useLocation()
-    console.log('location = ', location.pathname.split('/').pop())
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
             <div className="text-center bg-white p-8 rounded-lg shadow-xl w-11/12 max-w-lg">
