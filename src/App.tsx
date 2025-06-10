@@ -7,6 +7,7 @@ import Login from './pages/Login'
 import SignupPage from './pages/SignupPage'
 import ErrorPage from './pages/ErrorPage'
 import UserProfile from './pages/UserProfile'
+import DoctorPage from './pages/DoctorPage'
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
             <Route path='profile' element={<UserProfile />} />
             <Route path='login' element={<Login />} />
             <Route path='signup' element={<SignupPage />} />
+            <Route path='doctor' element={<DoctorPage />} />
             <Route path='*' element={<ErrorPage />} />
           </Route>
         </Routes>

@@ -1,4 +1,6 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Link } from 'react-router-dom'
 import React from 'react'
 
 const Products = () => {
@@ -42,10 +44,10 @@ const Products = () => {
     ]
 
     return (
-        <div className='bg-gray-100 h-full p-10'>
-            <div className='flex flex-col container mx-auto '>
+        <div className='bg-gray-100 min-h-screen p-10'>
+            <div className='flex flex-col container mx-auto'>
                 <h1 className='text-3xl font-bold mb-10 mx-10'>Recommended Products</h1>
-                <div className='flex flex-wrap justify-start '>
+                <div className='flex flex-wrap justify-start'>
                     {
                         productValue?.map((product) => (
                             <div key={product.id} className='w-2/8 mb-10 flex flex-wrap justify-start mx-10'>
@@ -65,6 +67,14 @@ const Products = () => {
                             </div>
                         ))
                     }
+                </div>
+                
+                <div className="flex justify-center mt-8 mb-4">
+                    <Link to="/doctor">
+                        <Button className="bg-primary text-white px-8 py-4 text-lg font-semibold hover:bg-primary/90 transition-colors">
+                            Consult with doctor
+                        </Button>
+                    </Link>
                 </div>
             </div>
         </div>

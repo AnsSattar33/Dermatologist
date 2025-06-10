@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Upload } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import React from 'react'
 
 const UploadingImage = () => {
@@ -17,7 +18,6 @@ const UploadingImage = () => {
     }
 
     const handleButtonClick = () => {
-
         if (image) {
             setButtonIsPressed(true)
         } else {
@@ -98,8 +98,15 @@ const UploadingImage = () => {
                     <Button onClick={handleButtonClick} className='w-full'>Submit</Button>
                 </div>
 
-                <div>
-                    {buttonIsPressed && (
+                {buttonIsPressed && (
+                    <>
+                        <div className="flex justify-center mt-8">
+                            <Link to="/doctor">
+                                <Button className="bg-primary text-white px-8 py-4 text-lg font-semibold hover:bg-primary/90 transition-colors">
+                                    Consult with doctor
+                                </Button>
+                            </Link>
+                        </div>
                         <div className='flex mt-20'>
                             {randomThree?.map((product) => (
                                 <div key={product.id} className='w-2/8 mb-10 flex flex-wrap justify-start mx-10'>
@@ -119,25 +126,23 @@ const UploadingImage = () => {
                                 </div>
                             ))}
                         </div>
-                    )}
-                </div>
 
-                {/* {
-                    buttonIsPressed && (<div className='w-1/4 mb-4'>
-                        <h1 className='text-2xl font-bold mb-5'>Skin Predictions</h1>
-                        <p className='text-lg mb-5 font-semibold'>Predictions based on your uploaded image:</p>
-                        <div className='flex flex-col items-start'>
-                            <p className='text-lg mb-2'><span className='font-bold'>Skin Type:</span> {buttonIsPressed ? 'Oily' : 'N/A'}</p>
-                            <p className='text-lg mb-2'><span className='font-bold'>Skin Condition:</span> {buttonIsPressed ? 'Acne' : 'N/A'}</p>
-                            <p className='text-lg mb-2'><span className='font-bold'>Recommended Products:</span> {buttonIsPressed ? 'Moisturizer, Sunscreen' : 'N/A'}</p>
-                            <p className='text-lg mb-2'><span className='font-bold'>Recommended Treatments:</span> {buttonIsPressed ? 'Salicylic Acid, Benzoyl Peroxide' : 'N/A'}</p>
-                            <p className='text-lg mb-2'><span className='font-bold'>Recommended Lifestyle Changes:</span> {buttonIsPressed ? 'Drink more water, Eat healthy' : 'N/A'}</p>
-                            <p className='text-lg mb-2'><span className='font-bold'>Recommended Diet:</span> {buttonIsPressed ? 'Low Glycemic Index' : 'N/A'}</p>
-                            <p className='text-lg mb-2'><span className='font-bold'>Recommended Supplements:</span> {buttonIsPressed ? 'Zinc, Omega-3' : 'N/A'}</p>
-                            <p className='text-lg mb-2'><span className='font-bold'>Recommended Skincare Routine:</span> {buttonIsPressed ? 'Cleanser, Moisturizer' : 'N/A'}</p>
-                        </div>
-                    </div>)
-                } */}
+                        {/* <div className='w-1/4 mb-4'>
+                            <h1 className='text-2xl font-bold mb-5'>Skin Predictions</h1>
+                            <p className='text-lg mb-5 font-semibold'>Predictions based on your uploaded image:</p>
+                            <div className='flex flex-col items-start'>
+                                <p className='text-lg mb-2'><span className='font-bold'>Skin Type:</span> {buttonIsPressed ? 'Oily' : 'N/A'}</p>
+                                <p className='text-lg mb-2'><span className='font-bold'>Skin Condition:</span> {buttonIsPressed ? 'Acne' : 'N/A'}</p>
+                                <p className='text-lg mb-2'><span className='font-bold'>Recommended Products:</span> {buttonIsPressed ? 'Moisturizer, Sunscreen' : 'N/A'}</p>
+                                <p className='text-lg mb-2'><span className='font-bold'>Recommended Treatments:</span> {buttonIsPressed ? 'Salicylic Acid, Benzoyl Peroxide' : 'N/A'}</p>
+                                <p className='text-lg mb-2'><span className='font-bold'>Recommended Lifestyle Changes:</span> {buttonIsPressed ? 'Drink more water, Eat healthy' : 'N/A'}</p>
+                                <p className='text-lg mb-2'><span className='font-bold'>Recommended Diet:</span> {buttonIsPressed ? 'Low Glycemic Index' : 'N/A'}</p>
+                                <p className='text-lg mb-2'><span className='font-bold'>Recommended Supplements:</span> {buttonIsPressed ? 'Zinc, Omega-3' : 'N/A'}</p>
+                                <p className='text-lg mb-2'><span className='font-bold'>Recommended Skincare Routine:</span> {buttonIsPressed ? 'Cleanser, Moisturizer' : 'N/A'}</p>
+                            </div>
+                        </div> */}
+                    </>
+                )}
             </div>
         </div>
     )
