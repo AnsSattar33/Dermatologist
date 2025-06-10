@@ -6,6 +6,8 @@ import Products from './pages/Products'
 import Login from './pages/Login'
 import SignupPage from './pages/SignupPage'
 import ErrorPage from './pages/ErrorPage'
+import UserProfile from './pages/UserProfile'
+
 function App() {
 
   return (
@@ -16,10 +18,10 @@ function App() {
             <Route index element={<LandingPage />} />
             <Route path='upload' element={<UploadingImage />} />
             <Route path='products' element={<Products />} />
-
-            <Route path='*' element={<ErrorPage />} />
+            <Route path='profile' element={<UserProfile />} />
             <Route path='login' element={<Login />} />
             <Route path='signup' element={<SignupPage />} />
+            <Route path='*' element={<ErrorPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
