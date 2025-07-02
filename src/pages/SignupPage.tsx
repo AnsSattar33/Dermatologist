@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
@@ -12,6 +12,7 @@ import { login } from '@/lib/redux/authSlice'
 import { useAppDispatch } from '@/hooks/useAppDispatch'
 import { Label } from '@/components/ui/label'
 import { toast } from 'sonner'
+import { account } from '@/lib/appwrite/config'
 
 const formSchema = z.object({
     username: z.string().min(2, 'Username must be at least 2 characters').max(50),
@@ -32,6 +33,18 @@ const SignupPage = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const [isLoading, setIsLoading] = useState(false)
+
+    useEffect(() => {
+        account.getSession('current')
+            .then((session) => {
+                if (session && session.userId) {
+                    navigate('/profile')
+                }
+            })
+            .catch(() => {
+                // No session, do nothing
+            })
+    }, [navigate])
 
     const form = useForm<FormData>({
         resolver: zodResolver(formSchema),

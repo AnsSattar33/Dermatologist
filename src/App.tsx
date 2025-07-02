@@ -8,6 +8,7 @@ import SignupPage from './pages/SignupPage'
 import ErrorPage from './pages/ErrorPage'
 import UserProfile from './pages/UserProfile'
 import DoctorPage from './pages/DoctorPage'
+import ProductDetails from './pages/ProductDetails'
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
             <Route index element={<LandingPage />} />
             <Route path='upload' element={<UploadingImage />} />
             <Route path='products' element={<Products />} />
+            <Route path='products/:id' element={<ProductDetails />} />
             <Route path='profile' element={<UserProfile />} />
             <Route path='login' element={<Login />} />
             <Route path='signup' element={<SignupPage />} />

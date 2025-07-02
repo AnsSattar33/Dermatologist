@@ -100,13 +100,6 @@ const UploadingImage = () => {
 
                 {buttonIsPressed && (
                     <>
-                        <div className="flex justify-center mt-8">
-                            <Link to="/doctor">
-                                <Button className="bg-primary text-white px-8 py-4 text-lg font-semibold hover:bg-primary/90 transition-colors">
-                                    Consult with doctor
-                                </Button>
-                            </Link>
-                        </div>
                         <div className='flex mt-20'>
                             {randomThree?.map((product) => (
                                 <div key={product.id} className='w-2/8 mb-10 flex flex-wrap justify-start mx-10'>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
@@ -10,14 +10,26 @@ import { z } from 'zod'
 import { loginAccount } from '@/lib/appwrite/auth'
 import { login } from '@/lib/redux/authSlice'
 import { useAppDispatch } from '@/hooks/useAppDispatch'
-import { useAppSelector } from '@/hooks/useAppSelector'
 import { Label } from '@/components/ui/label'
 import { toast } from 'sonner'
+import { account } from '@/lib/appwrite/config'
 
 const Login = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const [isLoading, setIsLoading] = useState(false)
+
+    useEffect(() => {
+        account.getSession('current')
+            .then((session) => {
+                if (session && session.userId) {
+                    navigate('/profile')
+                }
+            })
+            .catch(() => {
+                // No session, do nothing
+            })
+    }, [navigate])
 
     const formSchema = z.object({
         email: z.string().email('Invalid email address'),
@@ -38,17 +50,17 @@ const Login = () => {
         try {
             setIsLoading(true)
             const result = await loginAccount(values)
-            
+
             dispatch(login({
                 username: result.name || result.userId,
                 email: result.email,
             }))
-            
+
             toast.success('Welcome back!')
             navigate('/upload')
         } catch (error: any) {
             toast.error(error.message || 'Login failed. Please check your credentials.')
-            form.setError('password', { 
+            form.setError('password', {
                 type: 'manual',
                 message: 'Invalid credentials'
             })
@@ -74,9 +86,9 @@ const Login = () => {
                                     <FormItem>
                                         <FormLabel>Email</FormLabel>
                                         <FormControl>
-                                            <Input 
-                                                type='email' 
-                                                placeholder="Enter your email" 
+                                            <Input
+                                                type='email'
+                                                placeholder="Enter your email"
                                                 {...field}
                                                 disabled={isLoading}
                                                 autoComplete="email"
@@ -93,9 +105,9 @@ const Login = () => {
                                     <FormItem>
                                         <FormLabel>Password</FormLabel>
                                         <FormControl>
-                                            <Input 
-                                                type='password' 
-                                                placeholder="Enter your password" 
+                                            <Input
+                                                type='password'
+                                                placeholder="Enter your password"
                                                 {...field}
                                                 disabled={isLoading}
                                                 autoComplete="current-password"
@@ -106,8 +118,8 @@ const Login = () => {
                                 )}
                             />
 
-                            <Button 
-                                className='w-full' 
+                            <Button
+                                className='w-full'
                                 type='submit'
                                 disabled={isLoading}
                             >

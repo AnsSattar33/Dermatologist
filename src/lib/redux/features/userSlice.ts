@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { account } from "@/lib/appwrite/config";
-import { ID } from "appwrite";
 
 interface UserState {
   user: {
