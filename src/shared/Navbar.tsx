@@ -1,6 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu'
-import { FileSignatureIcon, Home, List, Stethoscope, User, } from 'lucide-react'
+import { FileSignatureIcon, Home, List, Stethoscope, User, ShoppingCart } from 'lucide-react'
 
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
@@ -13,6 +13,7 @@ const Navbar = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const { isAuthenticated, user } = useSelector((state: RootState) => state.auth)
+    const cartCount = useSelector((state: RootState) => state.cart.items.reduce((sum, item) => sum + item.quantity, 0))
     const [hasSession, setHasSession] = useState(false)
 
     useEffect(() => {
@@ -78,7 +79,12 @@ const Navbar = () => {
                         </li>
 
                     </ul>
-
+                    <Link to="/cart" className="relative hover:text-blue-400 transition flex items-center">
+                        <ShoppingCart />
+                        {cartCount > 0 && (
+                            <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">{cartCount}</span>
+                        )}
+                    </Link>
                 </div>
 
                 {/* Avatar Section */}
