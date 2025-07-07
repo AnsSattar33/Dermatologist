@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { z } from 'zod'
+import { Eye, EyeOff, Mail, Lock, Sparkles } from 'lucide-react'
 
 import { loginAccount } from '@/lib/appwrite/auth'
 import { login } from '@/lib/redux/authSlice'
@@ -18,6 +19,7 @@ const Login = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const [isLoading, setIsLoading] = useState(false)
+    const [showPassword, setShowPassword] = useState(false)
 
     useEffect(() => {
         account.getSession('current')
@@ -70,48 +72,88 @@ const Login = () => {
     }
 
     return (
-        <div className='flex min-h-screen bg-gray-100'>
-            <div className='w-1/2'>
-                <img src='/images/loginSignup-min.png' alt='login' className='h-full w-full object-cover' />
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-purple-50 relative overflow-hidden">
+            {/* Animated background elements */}
+            <div className="absolute inset-0 overflow-hidden">
+                <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-purple-400/20 to-pink-400/20 rounded-full blur-3xl animate-pulse"></div>
+                <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-blue-400/20 to-indigo-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-cyan-400/10 to-blue-400/10 rounded-full blur-3xl animate-pulse delay-500"></div>
             </div>
-            <div className='w-1/2 flex flex-col justify-center items-center p-8'>
-                <div className='w-full max-w-md'>
-                    <h2 className='text-3xl font-bold text-gray-900 mb-6 text-center'>Welcome Back</h2>
+
+            {/* Main login card */}
+            <div className="relative z-10 w-full max-w-md mx-4">
+                <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 p-8 space-y-8">
+                    {/* Header */}
+                    <div className="text-center space-y-2">
+                        <div className="flex items-center justify-center space-x-2 mb-4">
+                            <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl flex items-center justify-center">
+                                <Sparkles className="w-6 h-6 text-white" />
+                            </div>
+                            <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                                Welcome Back
+                            </h1>
+                        </div>
+                        <p className="text-gray-600 text-sm">
+                            Sign in to your account to continue
+                        </p>
+                    </div>
+
+                    {/* Form */}
                     <FormProvider {...form}>
-                        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
+                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                             <FormField
                                 control={form.control}
                                 name="email"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Email</FormLabel>
+                                        <FormLabel className="text-sm font-medium text-gray-700 flex items-center space-x-2">
+                                            <Mail className="w-4 h-4" />
+                                            <span>Email Address</span>
+                                        </FormLabel>
                                         <FormControl>
-                                            <Input
-                                                type='email'
-                                                placeholder="Enter your email"
-                                                {...field}
-                                                disabled={isLoading}
-                                                autoComplete="email"
-                                            />
+                                            <div className="relative">
+                                                <Input
+                                                    type='email'
+                                                    placeholder="Enter your email"
+                                                    {...field}
+                                                    disabled={isLoading}
+                                                    autoComplete="email"
+                                                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 bg-white/50 backdrop-blur-sm"
+                                                />
+                                            </div>
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
                                 )}
                             />
+                            
                             <FormField
                                 control={form.control}
                                 name="password"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Password</FormLabel>
+                                        <FormLabel className="text-sm font-medium text-gray-700 flex items-center space-x-2">
+                                            <Lock className="w-4 h-4" />
+                                            <span>Password</span>
+                                        </FormLabel>
                                         <FormControl>
-                                            <Input
-                                                type='password'
-                                                placeholder="Enter your password"
-                                                {...field}
-                                                disabled={isLoading}
-                                                autoComplete="current-password"
-                                            />
+                                            <div className="relative">
+                                                <Input
+                                                    type={showPassword ? 'text' : 'password'}
+                                                    placeholder="Enter your password"
+                                                    {...field}
+                                                    disabled={isLoading}
+                                                    autoComplete="current-password"
+                                                    className="w-full px-4 py-3 pr-12 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 bg-white/50 backdrop-blur-sm"
+                                                />
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setShowPassword(!showPassword)}
+                                                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                                                >
+                                                    {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                                                </button>
+                                            </div>
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -119,23 +161,34 @@ const Login = () => {
                             />
 
                             <Button
-                                className='w-full'
+                                className="w-full bg-black text-white font-medium py-3 rounded-xl transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                                 type='submit'
                                 disabled={isLoading}
                             >
-                                {isLoading ? 'Logging in...' : 'Login'}
+                                {isLoading ? (
+                                    <div className="flex items-center space-x-2">
+                                        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                                        <span>Signing in...</span>
+                                    </div>
+                                ) : (
+                                    'Sign In'
+                                )}
                             </Button>
-
-                            <div className='text-center mt-4'>
-                                <Label className='text-muted-foreground'>
-                                    Don't have an account?{' '}
-                                    <Link className='text-primary hover:underline' to='/signup'>
-                                        Sign up
-                                    </Link>
-                                </Label>
-                            </div>
                         </form>
                     </FormProvider>
+
+                    {/* Footer */}
+                    <div className="text-center pt-4 border-t border-gray-100">
+                        <Label className="text-sm text-gray-600">
+                            Don't have an account?{' '}
+                            <Link 
+                                className="text-purple-600 hover:text-purple-700 font-medium hover:underline transition-colors" 
+                                to='/signup'
+                            >
+                                Create one
+                            </Link>
+                        </Label>
+                    </div>
                 </div>
             </div>
         </div>
