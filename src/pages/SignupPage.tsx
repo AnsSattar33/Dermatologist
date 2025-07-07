@@ -6,7 +6,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { z } from 'zod'
-import { User, Mail, Lock, Sparkles } from 'lucide-react'
 
 import { createAccount } from '@/lib/appwrite/auth'
 import { login } from '@/lib/redux/authSlice'
@@ -84,51 +83,27 @@ const SignupPage = () => {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-purple-50 relative overflow-hidden">
-            {/* Animated background elements */}
-            <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-purple-400/20 to-pink-400/20 rounded-full blur-3xl animate-pulse"></div>
-                <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-blue-400/20 to-indigo-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-cyan-400/10 to-blue-400/10 rounded-full blur-3xl animate-pulse delay-500"></div>
+        <div className='flex min-h-screen bg-gray-100'>
+            <div className='w-1/2'>
+                <img src='\images\loginSignup.jpg' alt='signup' className='h-full w-full object-cover' />
             </div>
-
-            {/* Main signup card */}
-            <div className="relative z-10 w-full max-w-md mx-4">
-                <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 p-8 space-y-8">
-                    {/* Header */}
-                    <div className="text-center space-y-2">
-                        <div className="flex items-center justify-center space-x-2 mb-4">
-                            <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl flex items-center justify-center">
-                                <Sparkles className="w-6 h-6 text-white" />
-                            </div>
-                            <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                                Create Account
-                            </h1>
-                        </div>
-                        <p className="text-gray-600 text-sm">
-                            Sign up to get started
-                        </p>
-                    </div>
-
-                    {/* Form */}
+            <div className='w-1/2 flex flex-col justify-center items-center p-8'>
+                <div className='w-full max-w-md'>
+                    <h2 className='text-3xl font-bold text-gray-900 mb-6 text-center'>Create Account</h2>
                     <FormProvider {...form}>
-                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
                             <FormField
                                 control={form.control}
                                 name="username"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel className="text-sm font-medium text-gray-700 flex items-center space-x-2">
-                                            <User className="w-4 h-4" />
-                                            <span>Username</span>
-                                        </FormLabel>
+                                        <FormLabel>Username</FormLabel>
                                         <FormControl>
                                             <Input 
                                                 type='text' 
                                                 placeholder="Choose a username" 
                                                 {...field}
                                                 disabled={isLoading}
-                                                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 bg-white/50 backdrop-blur-sm"
                                             />
                                         </FormControl>
                                         <FormMessage />
@@ -141,17 +116,13 @@ const SignupPage = () => {
                                 name="email"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel className="text-sm font-medium text-gray-700 flex items-center space-x-2">
-                                            <Mail className="w-4 h-4" />
-                                            <span>Email Address</span>
-                                        </FormLabel>
+                                        <FormLabel>Email</FormLabel>
                                         <FormControl>
                                             <Input 
                                                 type='email' 
                                                 placeholder="Enter your email" 
                                                 {...field}
                                                 disabled={isLoading}
-                                                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 bg-white/50 backdrop-blur-sm"
                                             />
                                         </FormControl>
                                         <FormMessage />
@@ -164,17 +135,13 @@ const SignupPage = () => {
                                 name="password"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel className="text-sm font-medium text-gray-700 flex items-center space-x-2">
-                                            <Lock className="w-4 h-4" />
-                                            <span>Password</span>
-                                        </FormLabel>
+                                        <FormLabel>Password</FormLabel>
                                         <FormControl>
                                             <Input 
                                                 type='password' 
                                                 placeholder="Create a password" 
                                                 {...field}
                                                 disabled={isLoading}
-                                                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 bg-white/50 backdrop-blur-sm"
                                             />
                                         </FormControl>
                                         <FormMessage />
@@ -187,17 +154,13 @@ const SignupPage = () => {
                                 name="confirmPassword"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel className="text-sm font-medium text-gray-700 flex items-center space-x-2">
-                                            <Lock className="w-4 h-4" />
-                                            <span>Confirm Password</span>
-                                        </FormLabel>
+                                        <FormLabel>Confirm Password</FormLabel>
                                         <FormControl>
                                             <Input 
                                                 type='password' 
                                                 placeholder="Confirm your password" 
                                                 {...field}
                                                 disabled={isLoading}
-                                                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 bg-white/50 backdrop-blur-sm"
                                             />
                                         </FormControl>
                                         <FormMessage />
@@ -206,34 +169,23 @@ const SignupPage = () => {
                             />
 
                             <Button 
-                                className="w-full bg-black text-white font-medium py-3 rounded-xl transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                                className='w-full' 
                                 type='submit'
                                 disabled={isLoading}
                             >
-                                {isLoading ? (
-                                    <div className="flex items-center space-x-2">
-                                        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                                        <span>Creating account...</span>
-                                    </div>
-                                ) : (
-                                    'Sign Up'
-                                )}
+                                {isLoading ? 'Creating account...' : 'Sign Up'}
                             </Button>
+
+                            <div className='text-center mt-4'>
+                                <Label className='text-muted-foreground'>
+                                    Already have an account?{' '}
+                                    <Link className='text-primary hover:underline' to='/login'>
+                                        Login
+                                    </Link>
+                                </Label>
+                            </div>
                         </form>
                     </FormProvider>
-
-                    {/* Footer */}
-                    <div className="text-center pt-4 border-t border-gray-100">
-                        <Label className="text-sm text-gray-600">
-                            Already have an account?{' '}
-                            <Link 
-                                className="text-black font-medium hover:underline transition-colors" 
-                                to='/login'
-                            >
-                                Login
-                            </Link>
-                        </Label>
-                    </div>
                 </div>
             </div>
         </div>
